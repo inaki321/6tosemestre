@@ -108,7 +108,7 @@ def duplica(array):
         print('Duplicando: ' + dup)
         array.append(dup)
     else:
-        print('Faltan datos')
+        print('Faltan datos') 
         
 def duplicaN(array):
     if (array.len() >= 2):
@@ -239,7 +239,7 @@ while inputInstruccion != 'salir' :
    
    salir = 'No'
    
-   noNumInstrucciones = ['salir', '*'] #instrucciones que no necesitan input de numero
+   noNumInstrucciones = ['salir', '*','duplica'] #instrucciones que no necesitan input de numero
    
    if(inputInstruccion in noNumInstrucciones):
        while(salir != 'si'):
