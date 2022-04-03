@@ -239,7 +239,7 @@ while inputInstruccion != 'salir' :
    
    salir = 'No'
    
-   noNumInstrucciones = ['salir', '*','duplica'] #instrucciones que no necesitan input de numero
+   noNumInstrucciones = ['salir', '*','duplica','intercambia'] #instrucciones que no necesitan input de numero
    
    if(inputInstruccion in noNumInstrucciones):
        while(salir != 'si'):
