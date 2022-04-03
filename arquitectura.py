@@ -46,21 +46,21 @@ def Instrucciones(inputIn):
 #Aqui hay error        
    if(inputIn == 'seno'):
        resA = seno()
-       print('factorial: ',resA)
+       print('seno: ',resA)
        with open(dtime, "a") as f:
            f.write(str(resA))
            f.write('\n')
 
    if(inputIn == 'coseno'):
        resA = coseno()
-       print('factorial: ',resA)
+       print('coseno: ',resA)
        with open(dtime, "a") as f:
            f.write(str(resA))
            f.write('\n')
            
    if(inputIn == 'tangente'):
        resA = tan()
-       print('factorial: ',resA)
+       print('tangente: ',resA)
        with open(dtime, "a") as f:
            f.write(str(resA))
            f.write('\n')
@@ -72,7 +72,11 @@ def Instrucciones(inputIn):
    if(inputIn == 'intercambia'):
        intercambia()
    if(inputIn == 'intercambia n'):
-       intercambiaN()
+       resA = intercambiaN()
+       print('intercambia n: ',resA)
+       with open(dtime, "a") as f:
+           f.write(str(resA))
+           f.write('\n')
    if(inputIn == 'duerme'):
        duerme()
    if(inputIn == 'duerme n'):
@@ -80,13 +84,46 @@ def Instrucciones(inputIn):
    if(inputIn == 'muestra '):
        muestra()
    if(inputIn == 'promedio n'):
-       promedioN()
-   if(inputIn == 'comentario '):
+       resA = promedioN()
+       print('promedio: ',resA)
+       with open(dtime, "a") as f:
+           f.write(str(resA))
+           f.write('\n')
+           
+   if(inputIn == 'comentario'):
        comentario()
    if(inputIn == 'ecuacion 2 grado'):
-       ec2grado()
+       resA,resB = ec2grado()
+       print('ecuacion 2do grado: '+resA + ' '+ resB)
+       with open(dtime, "a") as f:
+           f.write(str(resA))
+           f.write('\n')
+           f.write(str(resB))
+           f.write('\n')
+       
    if(inputIn == 'memoria'):
-       memoria()
+       resA = memoria()
+       print('memoria: ',resA)
+       with open(dtime, "a") as f:
+           f.write(str(resA))
+           f.write('\n')
+   if(inputIn == 'cls'):
+       Cls()
+   if(inputIn == 'borra'):
+       resA = borra()
+       print('borrado: ',resA)
+       with open(dtime, "a") as f:
+           f.write(str(resA))
+           f.write('\n')
+   if(inputIn == 'reset'):
+       reset()
+   if(inputIn == 'signo'):
+       resA = signo()
+       print('signo: ',resA)
+       with open(dtime, "a") as f:
+           f.write(str(resA))
+           f.write('\n')
+           
    if(inputIn == 'leer'):
        leerTxt()
 
@@ -170,8 +207,9 @@ def borradofunc():
 def seno():
     signo=1
     salida=0
+    n = (inputNumerico[-1]*math.pi)/180
     for i in range(1,11,2):
-        salida = salida +(signo*pow(inputNumerico[-1],i)/math.factorial(i))
+        salida = salida +(signo*pow(n,i)/math.factorial(i))
         signo = -signo
     
     return salida
@@ -179,15 +217,16 @@ def seno():
 def coseno():
     signo=1
     salida=0
+    n = (inputNumerico[-1]*math.pi)/180
     for i in range(0,12,2):
-        salida = salida +(signo*pow(inputNumerico[-1],i)/math.factorial(i))
+        salida = salida +(signo*pow(n,i)/math.factorial(i))
         signo = -signo
     
     return salida
 
 def tan():
     salida = 0
-    salida = seno(inputNumerico[-1])/coseno(inputNumerico[-1])
+    salida = seno()/coseno()
     return salida
 
 def raiz():
@@ -196,6 +235,7 @@ def raiz():
         if(borrado==True):
             inputNumerico.pop()
         inputNumerico.append(n)
+        return n
     else:
         print('Error, faltan datos')
 
@@ -205,6 +245,7 @@ def logaritmo():
         if(borrado==True):
             inputNumerico.pop()
         inputNumerico.append(n)
+        return n
     else:
         print('Error, faltan datos')    
 
@@ -259,6 +300,7 @@ def intercambiaN():
             inputNumerico.insert(len(inputNumerico)-1+pos,n)
         inputNumerico.pop()
         inputNumerico.append(b)
+        return b
     else:
         print('Error al intercambiar, faltan datos')
 
@@ -297,6 +339,7 @@ def promedioN():
             for j in range(0,n):
                 inputNumerico.pop()
         inputNumerico.append(suma/n)
+        return inputNumerico[-1]
     else:
         print('Error al promediar, faltan datos')
 
@@ -325,14 +368,43 @@ def ec2grado():
                     inputNumerico.pop()
             inputNumerico.append(x1)
             inputNumerico.append(x2)
+            return x1,x2
     else:
         print('Error al resolver Ec 2 grado, faltan datos')
 
 def memoria():
     if(len(inputNumerico)>0):
         inputNumerico.append(len(inputNumerico))
+        return inputNumerico[-1]
     else:
         print('Error, no hay suficientes datos')
+
+def Cls():
+    os.system('cls||clear')
+
+def borra():
+    if(inputNumerico>=1):
+        n = inputNumerico[-1]
+        inputNumerico.remove(n)
+    else: 
+        print('Error al borrar, faltan datos')
+
+def signo():
+    if(inputNumerico>=1):
+        n = inputNumerico[-1]
+        if(borrado==True):
+            inputNumerico.pop()
+        inputNumerico.append(-n)
+        return inputNumerico[-1]
+    else:
+        print('Error al cambiar signo, faltan datos')
+
+def reset():
+    print('Tamaño de memoria = ' +len(inputNumerico))
+    print('Borrando memoria')
+    if(borrado==True):
+        borradofunc()
+    inputNumerico.clear()
 
 def leerTxt():
     with open('ejemplo.txt') as f:
@@ -381,7 +453,7 @@ while inputInstruccion != 'salir' :
    
    numeros=[]
    checkInput = input('deseas introducir numeros? ')
-   if(checkInput == 'si'):
+   if(checkInput.lower() == 'si'):
        inputNumeros = input('Dame los numeros que quieres introducir por espacios: ') 
        inputNumeros = inputNumeros.split()
        for i in range(0, len(inputNumeros)):
@@ -389,7 +461,10 @@ while inputInstruccion != 'salir' :
                inputNumerico.append(float(inputNumeros[i]))
            except:
                pass
-   inputInstruccion = input('Dame tu instruccion a realizar: ')
+   elif(checkInput.lower() == 'no'): 
+       inputInstruccion = input('Dame tu instruccion a realizar: ')
+   else:
+       print('Error de input')
    
            
    if(inputInstruccion == '*'):
