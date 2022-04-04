@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
-import math
 import time
 from datetime import date, datetime
 from os.path import exists
-
+import os 
    
 def Instrucciones(inputIn):
 
@@ -13,8 +11,6 @@ def Instrucciones(inputIn):
        with open(dtime, "a") as f:
            f.write(str(resA))
            f.write('\n')
-           f.write(str(inputNumerico))
-           f.write('\n')
 
    if(inputIn == 'resta'):
        resA = resta()
@@ -22,16 +18,13 @@ def Instrucciones(inputIn):
        with open(dtime, "a") as f:
            f.write(str(resA))
            f.write('\n')
-           f.write(str(inputNumerico))
-           f.write('\n')
+
 
    if(inputIn == 'multiplicacion'):
        resA = multiplica()
        print('multiplicacion: ',resA)
        with open(dtime, "a") as f:
            f.write(str(resA))
-           f.write('\n')
-           f.write(str(inputNumerico))
            f.write('\n')
 
    if(inputIn == 'division'):
@@ -40,8 +33,6 @@ def Instrucciones(inputIn):
        with open(dtime, "a") as f:
            f.write(str(resA))
            f.write('\n')
-           f.write(str(inputNumerico))
-           f.write('\n')
 
    if(inputIn == 'factorial'):
        resA = factorial()
@@ -49,16 +40,13 @@ def Instrucciones(inputIn):
        with open(dtime, "a") as f:
            f.write(str(resA))
            f.write('\n')
-           f.write(str(inputNumerico))
-           f.write('\n')
-           
+    
+#Aqui hay error        
    if(inputIn == 'seno'):
        resA = seno()
        print('factorial: ',resA)
        with open(dtime, "a") as f:
            f.write(str(resA))
-           f.write('\n')
-           f.write(str(inputNumerico))
            f.write('\n')
 
    if(inputIn == 'coseno'):
@@ -67,16 +55,12 @@ def Instrucciones(inputIn):
        with open(dtime, "a") as f:
            f.write(str(resA))
            f.write('\n')
-           f.write(str(inputNumerico))
-           f.write('\n')
            
    if(inputIn == 'tangente'):
        resA = tan()
        print('factorial: ',resA)
        with open(dtime, "a") as f:
            f.write(str(resA))
-           f.write('\n')
-           f.write(str(inputNumerico))
            f.write('\n')
 
    if(inputIn == 'duplica'):
@@ -351,11 +335,28 @@ def memoria():
 def leerTxt():
     with open('ejemplo.txt') as f:
         lines = f.readlines()
+
+    checkArray=[]
+    for k in range(0,len(lines)):
+        auxi = lines[k].split()    
+        checkArray.append(auxi)
     
     for i in range(0,len(lines)):
         arrayAux = lines[i].split()
         instruccionAux = arrayAux[-1]
         del arrayAux[-1]
+        
+        check = 1
+        if(len(inputNumerico)>0):
+            check = inputNumerico[-1]
+        
+        if check == 0:
+            inputNumerico.append(1)
+            continue 
+        
+        if checkArray[i-1][-1]=='salta':
+            continue
+        
         for j in arrayAux:
             inputNumerico.append(float(j))
         Instrucciones(instruccionAux)
@@ -375,21 +376,19 @@ inputNumerico = []
 borrado = False
 
 while inputInstruccion != 'salir' :
-    
-   inputInstruccion = input('Dame tu instruccion a realizar: ')
    
-   salir = 'No'
-   
-   noNumInstrucciones = ['salir', '*','duplica','intercambia','leer'] #instrucciones que no necesitan input de numero
-
-   if(inputInstruccion not in noNumInstrucciones):
-       while(salir != 'si'):
+   numeros=[]
+   checkInput = input('deseas introducir numeros? ')
+   if(checkInput == 'si'):
+       inputNumeros = input('Dame los numeros que quieres introducir por espacios: ') 
+       inputNumeros = inputNumeros.split()
+       for i in range(0, len(inputNumeros)):
            try:
-               aux = float(input('Dame los numeros: '))
-               inputNumerico.append(aux)
+               inputNumerico.append(float(inputNumeros[i]))
            except:
                pass
-           salir = input('¿Quieres terminar de guardar numeros? ')
+   inputInstruccion = input('Dame tu instruccion a realizar: ')
+   
            
    if(inputInstruccion == '*'):
        borradofunc()
@@ -403,8 +402,6 @@ while inputInstruccion != 'salir' :
        f.write('\n')
        f.write(str(inputInstruccion))
        f.write('\n')      
-       f.write(str(inputNumerico))
-       f.write('\n')
    
    Instrucciones(inputInstruccion)
    if(inputInstruccion=='salir'):
