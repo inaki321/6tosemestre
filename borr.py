@@ -335,7 +335,7 @@ def seno(nums = 'default', cicloss = 'default'):
 def coseno(nums = 'default', cicloss = 'default'):   
     #ciclos, valor
 
-
+    
     if (len(inputNumerico)>1):
         if(nums == 'default' and cicloss == 'default'):    
             num = inputNumerico[-1] 
@@ -345,19 +345,12 @@ def coseno(nums = 'default', cicloss = 'default'):
             print('mucho antes ',cicloss)
             num = nums
             num = (num*math.pi)/180
-            print('antes:',cicloss)
             ciclos = int(cicloss)
-            print('Estas en coseno ', cicloss)
-        
-        print('Estas en coseno ')
-        print('Estas en coseno ', num)
-        print('Estas en coseno ', ciclos)
+
         if(ciclos<4 or ciclos>8):
             return 'Dame un numero entre 4 y 8 de ciclos'
         
         
-        print('VALORES ALA PUTA VERGFA EN SENO',num)
-        print('VALORES ALA PUTA VERGFA EN SENO ',ciclos)
         
         with open(dtime, "a") as f:
            f.write('\n')
@@ -467,7 +460,8 @@ def raiz():
    if(inputNumerico[-2]<5 or inputNumerico[-2]>15):
         return ('Dame un numero entre 5 y 15 para ciclos')
     
-
+    
+   numraizdos = inputNumerico[-1]
    if (len(inputNumerico)>=2):
         num = inputNumerico[-1]
         ciclos = int(inputNumerico[-2])
@@ -487,8 +481,7 @@ def raiz():
                        f.write('\n')
                        f.write(str('duplica'))
                        f.write('\n')
-        n1 = round(rd.uniform(0, 1)*num/2)
-        print('ptuo n1 ',n1)
+        n1 =  rd.uniform(0, 1) * num / 2
         with open(dtime, "a") as f:
            f.write('\n')
            f.write(str(n1))
@@ -505,7 +498,7 @@ def raiz():
                f.write('comentario')
                f.write('\n') 
                f.write('inicia el ciclo '+str(i+1))
-            Instrucciones('division')
+            Instrucciones('divide')
             with open(dtime, "a") as f:
                        f.write('\n')
                        f.write(str('division'))
@@ -520,7 +513,9 @@ def raiz():
                    f.write(str(1))
                    f.write('\n') 
             inputNumerico.append(1)
+            print(inputNumerico)
             Instrucciones('intercambia n')
+            print(inputNumerico)
             with open(dtime, "a") as f:
                        f.write('\n')
                        f.write(str('intercambia n'))
@@ -540,7 +535,7 @@ def raiz():
                        f.write('\n')
                        f.write(str('intercambia n'))
                        f.write('\n')
-            Instrucciones('division')
+            Instrucciones('divide')
             with open(dtime, "a") as f:
                        f.write('\n')
                        f.write(str('division'))
@@ -561,7 +556,25 @@ def raiz():
                        f.write('\n') 
                        f.write('fin del ciclo '+str(i+1))
         Instrucciones('muestra')
-        return inputNumerico[-1]
+        Instrucciones('*')
+        with open(dtime, "a") as f:
+               f.write('\n')
+               f.write(str('*'))
+               f.write('\n')
+   
+   raizuno = inputNumerico[-1]
+   
+   if(len(inputNumerico)>=1):
+       n = math.sqrt(numraizdos)
+       raizdos = n
+       if(borrado==True):
+           inputNumerico.pop()
+           inputNumerico.append(n)
+       else:
+           pass      
+   
+   return 'raiz1:' + str(raizuno)+' raiz2: '+ str(raizdos)
+   
 
 def logaritmo():
     if(len(inputNumerico)>=1):
@@ -663,12 +676,12 @@ def muestra():
 def promedioN():
     if(len(inputNumerico) >= 1):
         n = inputNumerico[-1]
-        if(len(inputNumerico)>=n):
+        if(len(inputNumerico)>=n+1):
             suma = 0
-            for i in range(0,math.floor(n)):
+            for i in range(0,round(n)):
                 suma += inputNumerico[len(inputNumerico)-1-i]
             if (borrado == True):
-                for j in range(0,n):
+                for j in range(0,n+1):
                     inputNumerico.pop()
             inputNumerico.append(suma/n)
             return inputNumerico[-1]
