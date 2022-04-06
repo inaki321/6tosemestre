@@ -1,0 +1,10 @@
+suma
+2 2 suma
+3 2 resta
+4 4 5 7 4 5 multiplicacion 
+salta 
+4 3 suma  
+5 9 resta
+0 0 suma
+2 3 multiplicacion
+2 6 factorial
