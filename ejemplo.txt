@@ -6,5 +6,7 @@ salta
 4 3 suma  
 5 9 resta
 0 0 suma
+salta0
 2 3 multiplicacion
 2 6 factorial
+
