@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import math
 import time
 from datetime import date, datetime
@@ -113,6 +114,7 @@ def Instrucciones(inputIn):
    if(inputIn == 'comentario'):
        resA = comentario()
        print('memoria: ',resA)
+       varResultado["text"] = "memoria: " + str(resA)
        with open(dtime, "a") as f:
            f.write(str(resA))
            f.write('\n')
@@ -172,6 +174,7 @@ def suma():
         inputNumerico.append(res)
         return(res)
     else:
+       labelError["text"] = "No se pudo realizar la instruccion"
        return('No se pudo realizar la instruccion')
        
 def resta():
@@ -184,6 +187,7 @@ def resta():
         inputNumerico.append(res)
         return(res)
     else:
+        labelError["text"] = "No se pudo realizar la instruccion"
         return('no se pudo realizar la instruccion ')
 
 def multiplica():
@@ -196,6 +200,7 @@ def multiplica():
         inputNumerico.append(res)
         return(res)
     else:
+        labelError["text"] = "No se pudo realizar la instruccion"
         return('no se pudo realizar la instruccion ')
 
 def divide():
@@ -209,8 +214,10 @@ def divide():
             inputNumerico.append(res)
             return(res)
         else:
+            labelError["text"] = 'no se pudo realizar la instruccion "/0" '
             return('no se pudo realizar la instruccion "/0" ')
     else:
+        labelError["text"] = "No se pudo realizar la instruccion"
         return('no se pudo realizar la instruccion ')
     
 def factorial():
@@ -226,6 +233,7 @@ def factorial():
         inputNumerico.append(factorial)
         return(factorial)
     else:
+        labelError["text"] = "No se pudo realizar la instruccion"
         return('no se pudo realizar la instruccion ')
 
 def borradofunc():
@@ -342,6 +350,7 @@ def coseno(nums = 'default', cicloss = 'default'):
             num = (num*math.pi)/180
             ciclos = int(inputNumerico[-2])
         else:
+            varResultado["text"] = "mucho antes "+str(cicloss)
             print('mucho antes ',cicloss)
             num = nums
             num = (num*math.pi)/180
@@ -450,6 +459,7 @@ def tan():
     salida = 0
     sen = seno(valor,ciclos) 
     cos = coseno(valor,ciclos)
+    varResultado["text"] = "res: " + str(sen) + "\n res2: "+str(cos)
     print('res: ',sen)
     print('res2: ',cos)
     salida = sen/cos
@@ -573,7 +583,7 @@ def raiz():
        else:
            pass      
    
-   return 'raiz1:' + str(raizuno)+' raiz2: '+ str(raizdos)
+   return 'Raiz1:' + str(raizuno)+' Raiz2: '+ str(raizdos)
    
 
 def logaritmo():
@@ -584,14 +594,17 @@ def logaritmo():
         inputNumerico.append(n)
         return n
     else:
+        labelError["text"] = "Error, faltan datos"
         print('Error, faltan datos')    
 
 def duplica():
     if (len(inputNumerico) >= 1):
         dup = inputNumerico[-1]
+        varResultado["text"] = "Duplicado: "+str(dup)
         print('Duplicando: ' + str(dup))
         inputNumerico.append(dup)
     else:
+        labelError["text"] = "Error, faltan datos"
         print('Faltan datos')
         
 def duplicaN():
@@ -601,10 +614,12 @@ def duplicaN():
     
         print('Duplicando: {}'.format(valor))
         print('Veces: {}'.format(n))
+        varResultado["text"] = "Duplicando: {}".format(valor) + "\n Veces: {}".format(n)
         
         for i in range(0,math.floor(n)):
             inputNumerico.append(valor)
     else:
+        labelError["text"] = "Error, faltan datos"
         print('Faltan datos')
 
 def intercambia():
@@ -618,6 +633,7 @@ def intercambia():
         inputNumerico.append(n1)
         inputNumerico.append(n2)
     else:
+        labelError["text"] = "Error, faltan datos"
         print('Faltan datos')
 
 def intercambiaN():
@@ -631,18 +647,21 @@ def intercambiaN():
                 b = inputNumerico[pos]
                 inputNumerico.insert(pos,n)
             except:
+                labelError["text"] = "N fuera de alcance en la memoria"
                 return('N fuera de alcance en la memoria')
         else:
             try:
                 b = inputNumerico[len(inputNumerico)+pos]
                 inputNumerico.insert(len(inputNumerico)+pos,n)
             except:
+                labelError["text"] = "N fuera de alcance en la memoria"
                 return('N fuera de alcance en la memoria')
         
         inputNumerico.pop()
         inputNumerico.append(b)
         return b
     else:
+        labelError["text"] = "Error al intercambiar, faltan datos"
         print('Error al intercambiar, faltan datos')
 
 def duermeN():
@@ -650,21 +669,28 @@ def duermeN():
         n = inputNumerico[-1]
         
         print('Durmiendo {} segundos'.format(n))
+        varResultado["text"] = "Durmiendo {} segundos".format(n)
         time.sleep(math.floor(n))
     else:
+        labelError["text"] = "Error al dormir, faltan datos"
         print('Error al dormir, faltan datos')
 
 def duerme():
     try:
+        varResultado["text"] = "Durmiendo 5 segundos"
         print('Duemriendo 5 segundos')
         time.sleep(5)
     except:
+        labelError["text"] = "Ocurrio un error al dormir"
         print('Ocurrio un error al dormir')
 
 def muestra():
     if (borrado==True):
+        labelError["text"] = "****Con Borrado****"
         print('****Con Borrado****')
+        
     else:
+        labelError["text"] = "****Sin Borrado****"
         print('****Sin Borrado****')
     
     varResultado["text"] = "Memoria: " + str(inputNumerico)
@@ -686,8 +712,10 @@ def promedioN():
             inputNumerico.append(suma/n)
             return inputNumerico[-1]
         else: 
+            labelError["text"] = 'No se puede promediar {} numeros'.format(n)
             print('No se puede promediar {} numeros'.format(n))
     else:
+        labelError["text"] = "Error al promediar, faltan datos"
         print('Error al promediar, faltan datos')
 
 
@@ -695,14 +723,31 @@ def promedioN():
 def comenGraf(co, ve):
     com = co.get()
     varResultado["text"] = "Comentario: "+ str(com)
+    print('Comentario: '+com)
     ve.destroy()
+    return com
     
 def comentario():
     try:
-        comment = input('Escriba un comentario: ')
-        print('Comentario: '+comment)
-        return comment
+        # Voy a quitar el input por que no funciona en la grafica
+        #comment = input('Escriba un comentario: ')
+        ventanaComm = tkinter.Tk()
+        ventanaComm.geometry("1200x350")
+        #comment = input('Escriba un comentario: ')
+        labelComment = tkinter.Label(ventanaComm,text="Escriba un comentario: ", font = "Helvetica 12", width = 18)
+        inputComment = tkinter.Entry(ventanaComm, font = "Helvetica 19", width = 15)
+        labelComment.grid(row = 4, column =0, padx = 5, pady = 30)
+        inputComment.grid(row = 4, column =1, padx = 15, pady = 30)
+        
+        
+        botonComment = tkinter.Button(ventanaComm, text = "Enter", padx = 18, pady=5, command = lambda:  comenGraf(inputComment, ventanaComm)  )
+        botonComment.grid(row = 4, column = 2, ipadx = 10, pady = 8)
+        ventanaComm.protocol("WM_DELETE_WINDOW")
+        ventanaComm.mainloop()
+        
+        
     except:
+        labelError["text"] = "Ocurrio un error"
         print('Ocurrio un error')
 
 
@@ -714,6 +759,7 @@ def ec2grado():
         
         d = b**2 - (4*a*c)
         if (d<0):
+            labelError["text"] = "No tiene raices reales"
             print('No tiene raices reales')
         else:
             x1=(-b+math.sqrt(d))/(2*a)
@@ -725,6 +771,7 @@ def ec2grado():
             inputNumerico.append(x2)
             return x1, x2
     else:
+        labelError["text"] = "Error al resolver Ec 2 grado, faltan datos"
         print('Error al resolver Ec 2 grado, faltan datos')
 
 def memoria():
@@ -732,6 +779,7 @@ def memoria():
         inputNumerico.append(len(inputNumerico))
         return inputNumerico[-1]
     else:
+        labelError["text"] = "Error, no hay suficientes datos"
         print('Error, no hay suficientes datos')
 
 
@@ -745,6 +793,7 @@ def borra():
         inputNumerico.remove(n)
         return n
     else: 
+        labelError["text"] = "Error al borrar, faltan datos"
         print('Error al borrar, faltan datos')
 
 def signo():
@@ -755,10 +804,13 @@ def signo():
         inputNumerico.append(-n)
         return inputNumerico[-1]
     else:
+        labelError["text"] = "Error al cambiar signo, faltan datos"
         print('Error al cambiar signo, faltan datos')
 
 def reset():
-    print('Tamaño de memoria = ' +str(len(inputNumerico)))
+    varResultado["text"] = "Tamaño de memoria = " + str(len(inputNumerico))
+    labelError["text"] = "Borrando memoria"
+    print('Tamaño de memoria = ' +len(inputNumerico))
     print('Borrando memoria')
     if(borrado==True):
         borradofunc()
@@ -782,12 +834,9 @@ def leerTxt():
         if(len(inputNumerico)>0):
             check = inputNumerico[-1]
         
-#        if check == 0:
- #           inputNumerico.append(1)
-  #          continue 
         if checkArray[i-1][-1]=='salta0' and check == 0:
             continue
-
+        
         if checkArray[i-1][-1]=='salta':
             continue
         
@@ -817,7 +866,7 @@ numeros=[]
 #       Quite el while que eso solo jala con la logica de la terminal
 
 ventana = tkinter.Tk()
-ventana.geometry("1200x350")
+ventana.geometry("1300x400")
 
 
     
@@ -884,14 +933,15 @@ instruccionLabel = tkinter.Label(ventana,text = "Instruccion:", font = "Helvetic
 instruccionLabel.grid(row = 1, column =0, padx = 5, pady = 15)
 inputInstruccionGraf1 = tkinter.Entry(ventana, font = "Helvetica 19", width = 12)
 inputInstruccionGraf1.grid(row = 1, column =1, padx = 5, pady = 15)
-enviarBoton = tkinter.Button(ventana, text = "Enter", padx = 28, pady=5, command = pasarVar)
+enviarBoton = tkinter.Button(ventana, text = "Enter", padx = 25,bg = "#2EA44F",fg="#FFFFFF", borderwidth=0.4 , pady=6, font = "Helvetica 13", command = pasarVar)
 enviarBoton.grid(row = 3, column = 0, ipadx = 25, pady = 8)
-clearBoton = tkinter.Button(ventana, text = "Clear", padx = 28, pady=5, command = clear_text)
+clearBoton = tkinter.Button(ventana, text = "Clear", padx = 25, pady=6,bg = "#3D82F7",fg="#FFFFFF",  borderwidth=0.4 , font = "Helvetica 13",command = clear_text)
 clearBoton.grid(row = 3, column = 1, ipadx = 25, pady = 24)
 labelResultado = tkinter.Label(ventana, text = "Resultado: ", font = "Helvetica 29")
 labelResultado.grid(row = 1, column = 3, pady = 10, padx = 40)
 varResultado = tkinter.Label(ventana, font = "Helvetica 19")
 varResultado.grid(row = 1, column = 4, pady = 40)
+varResultado.grid_rowconfigure(0, weight = 1)
 labelError = tkinter.Label(ventana, font = "Helvetica 21", fg = "red")
 labelError.grid(row = 2, column = 3, pady = 10, padx = 40)
 
