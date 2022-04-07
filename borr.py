@@ -118,7 +118,7 @@ def Instrucciones(inputIn):
            f.write('\n')
    if(inputIn == 'ecuacion 2 grado'):
        resA,resB = ec2grado()
-       print('ecuacion 2do grado: '+resA + ' '+ resB)
+       print('ecuacion 2do grado: '+str(resA) + ' '+ str(resB))
        varResultado["text"] = "ecuacion 2do grado: " + str(resA) + " " + str(resB)
        with open(dtime, "a") as f:
            f.write(str(resA))
@@ -758,7 +758,7 @@ def signo():
         print('Error al cambiar signo, faltan datos')
 
 def reset():
-    print('Tamaño de memoria = ' +len(inputNumerico))
+    print('Tamaño de memoria = ' +str(len(inputNumerico)))
     print('Borrando memoria')
     if(borrado==True):
         borradofunc()
@@ -782,10 +782,12 @@ def leerTxt():
         if(len(inputNumerico)>0):
             check = inputNumerico[-1]
         
-        if check == 0:
-            inputNumerico.append(1)
-            continue 
-        
+#        if check == 0:
+ #           inputNumerico.append(1)
+  #          continue 
+        if checkArray[i-1][-1]=='salta0' and check == 0:
+            continue
+
         if checkArray[i-1][-1]=='salta':
             continue
         
